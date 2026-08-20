@@ -47,4 +47,14 @@ postSchema.statics.findByAuthor = function(author) {
     return this.find({ author: new RegExp(author, 'i') });
 };
 
+// Virtual relationship with comments
+postSchema.virtual('commentList', {
+    ref: 'Comment',
+    localField: '_id',
+    foreignField: 'post'
+});
+
+// Enable virtuals in JSON responses
+postSchema.set('toJSON', { virtuals: true });
+
 module.exports = mongoose.model('Post', postSchema);

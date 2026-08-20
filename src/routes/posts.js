@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const postsController = require('../controllers/postsController');
+const commentsController = require('../controllers/commentsController');
 
 // Get all posts
 router.get('/', postsController.getAllPosts);
@@ -19,5 +20,13 @@ router.delete('/:id', postsController.deletePost);
 
 // Like post
 router.post('/:id/like', postsController.likePost);
+
+// Comments
+router.get('/:postId/comments', commentsController.getComments);
+router.post('/:postId/comments', commentsController.createComment);
+router.delete(
+    '/:postId/comments/:commentId',
+    commentsController.deleteComment
+);
 
 module.exports = router;
