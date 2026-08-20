@@ -1,4 +1,5 @@
 const express = require('express');
+const postsRoutes = require('./routes/posts');
 
 const app = express();
 
@@ -12,5 +13,8 @@ app.get('/', (req, res) => {
         message: 'Welcome to the CommunityHub API!'
     });
 });
+
+// Posts routes
+app.use('/api/posts', postsRoutes);
 
 module.exports = app;
