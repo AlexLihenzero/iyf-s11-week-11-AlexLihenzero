@@ -14,8 +14,9 @@ const postSchema = new mongoose.Schema({
         minlength: [10, 'Content must be at least 10 characters']
     },
     author: {
-        type: String,
-        required: [true, 'Author is required']
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: [true, 'Author is required']
     },
     likes: {
         type: Number,
@@ -40,11 +41,6 @@ postSchema.index({ title: 'text', content: 'text' });
 postSchema.methods.like = function() {
     this.likes++;
     return this.save();
-};
-
-// Static method
-postSchema.statics.findByAuthor = function(author) {
-    return this.find({ author: new RegExp(author, 'i') });
 };
 
 // Virtual relationship with comments
