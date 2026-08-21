@@ -1,5 +1,6 @@
 const express = require('express');
 const postsRoutes = require('./routes/posts');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -16,5 +17,8 @@ app.get('/', (req, res) => {
 
 // Posts routes
 app.use('/api/posts', postsRoutes);
+
+// Authentication routes
+app.use('/api/auth', authRoutes);
 
 module.exports = app;
